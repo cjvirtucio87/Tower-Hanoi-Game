@@ -31,4 +31,37 @@ describe TowersApp do
       expect(towers_game.source_tower_choice).to eq (:first)
     end
   end
+
+  describe "#destination_tower_choice" do
+    it "returns a symbol representing the tower from which a disc will be removed" do
+      towers_game.set_difficulty(:easy)
+      towers_game.build_towers
+      towers_game.stub(:gets) {"first"}
+      expect(towers_game.source_tower_choice).to eq (:first)
+    end
+  end
+
+  #Both source_tower_choice and destination_tower_choice use this method
+  #to test for errors in player input.
+  describe "#tower_choice_error" do
+    it "raises an error when the tower name is incorrectly spelled" do
+      towers_game.set_difficulty(:easy)
+      towers_game.build_towers
+      expect{towers_game.tower_choice_error(:segundo, true)}.to raise_error
+    end
+    it "raises an error when the source tower choice is empty" do
+      towers_game.set_difficulty(:easy)
+      towers_game.build_towers
+      expect{towers_game.tower_choice_error(:second, true)}.to raise_error
+    end
+    it "raises an error when the topmost disc on the destination tower choice"\
+      "is lesser than the topmost disc on the source tower choice" do
+      towers_game.set_difficulty(:easy)
+      towers_game.build_towers
+      towers_game.towers[:first] = [3, 2]
+      towers_game.towers[:third] = [1]
+      towers_game.source_tower = :first
+      expect{towers_game.tower_choice_error(:third, false)}.to raise_error
+    end
+  end
 end
