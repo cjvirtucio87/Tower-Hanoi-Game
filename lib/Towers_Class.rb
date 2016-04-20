@@ -36,8 +36,7 @@ class Towers
 
   #Checking if the player has won or lost.
   def win?
-    @win = true if @towers[:third] == (1..@disc_num).sort\
-        {|num1,num2| num2 <=> num1}
-    @win
+    @win = !!(@towers[:third] == (1..@disc_num).sort\
+        {|num1,num2| num2 <=> num1})
   end
 end

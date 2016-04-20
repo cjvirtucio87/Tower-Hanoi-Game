@@ -24,7 +24,7 @@ class TowersApp
 
   def difficulty_prompt
     puts "\nHello, #{@player_name}. Select a difficulty level!"
-    puts "[EASY] [MEDIUM] [HARD]"
+    puts "[EASY || MEDIUM || HARD]"
     begin
       @app_difficulty = gets.chomp.downcase.to_sym
       raise StandardError if %w{easy medium hard}.none? do |diff|
@@ -52,7 +52,8 @@ class TowersApp
 
   #Picking a source tower.
   def source_tower_choice
-    puts "From which tower will you remove a disc?"
+    puts "Whose disc will you remove?"
+    puts "[FIRST || SECOND || THIRD]"
     begin
       @source_tower = gets.chomp.downcase.to_sym
       self.tower_choice_error(@source_tower, true)
