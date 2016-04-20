@@ -1,5 +1,7 @@
-require_relative "Towers_Class"
-require_relative "TowersApp_Class"
+#!/usr/bin/ruby
+
+require './Towers_Class'
+require './TowersApp_Class'
 
 towers_game = TowersApp.new(Towers.new)
 
