@@ -27,21 +27,25 @@ describe Towers do
     end
   end
 
-  describe "#status" do
+  describe "#get_disc_sizes" do
     context "given the selected difficulty of :easy'" do
-      it "returns a list of the towers" do
+      it "returns an array of disc sizes, each of which is equivalent\n \
+                to (n-i) + ((n-i)-1), where \n \
+                n = length of the array, and i = current index." do
         towers_game.set_difficulty(:easy)
         towers_game.build_towers
-        expect(towers_game.status).to eq("[3, 2, 1]\n[]\n[]")
+        expect(towers_game.get_disc_sizes).to eq([5, 3, 1])
       end
     end
   end
 
-  describe "#move_disc" do
-    context "given :first as the source tower and :third as the destination tower" do
-      it "moves the topmost disc in the first tower to the third tower" do
-        towers_game.move_disc(:first, :third)
-        expect(towers_game.status).to eq("[3, 2]\n[]\n[1]")
+  describe "#get_space_count" do
+    context "given the selected difficulty of :easy" do
+      it "returns an array of number of spaces per level,\n \
+          each of which is equivalent to (n-1) - i, where \n \
+          n = length of the array, and i = current index." do
+        towers_game.set_difficulty(:easy)
+        expect(towers_game.get_space_count(:first)).to eq([2,1,0])
       end
     end
   end
