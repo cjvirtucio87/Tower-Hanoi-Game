@@ -1,7 +1,7 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-require '../lib/Towers_Class'
-require '../lib/TowersApp_Class'
+require 'Towers_Class'
+require 'TowersApp_Class'
 
 towers_game = TowersApp.new(Towers.new)
 
