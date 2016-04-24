@@ -2,7 +2,7 @@
 Gem based on the Tower of Hanoi game (https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 
 
-Simply type $towers_of_hanoi in the command line after installing the gem.
+Simply type $tower-hanoi-game in the command line after installing the gem.
 
 
 Type $quit to exit the game.
