@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
-require './Towers_Class'
-require './TowersApp_Class'
+require '../lib/Towers_Class'
+require '../lib/TowersApp_Class'
 
 towers_game = TowersApp.new(Towers.new)
 

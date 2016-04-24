@@ -24,4 +24,4 @@ TO-DO LIST [2:07, 1/17/16]:
 
 (2) Better intro.
 
-(3) Better representation of the discs.
+~~(3) Better representation of the discs.~~ ADDED RENDER METHOD [5:30, 4/23/16]
