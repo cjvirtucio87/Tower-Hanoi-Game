@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["CJ Virtucio"]
   s.email       = 'virtucio.cj@gmail.com'
   s.files       = ["bin/towers_of_hanoi.rb", "lib/Towers_Class.rb", "lib/TowersApp_Class.rb"]
-  s.executables = ['towers_of_hanoi.rb']
+  s.executables = ['towers_of_hanoi']
   s.homepage    =
     'http://rubygems.org/gems/cjvirtucio87'
   s.license       = 'MIT'
