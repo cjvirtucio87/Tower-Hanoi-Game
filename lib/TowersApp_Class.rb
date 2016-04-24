@@ -4,7 +4,7 @@ class TowersApp
   def initialize(target_object)
     @target = target_object
     @messages = []
-    puts "Welcome to Towers of Hanoi!"
+    puts "\nWelcome to Towers of Hanoi!"
     sleep 1.5
     puts "Please type in your name!"\
     "\nNo spaces, numbers, or special characters!"
@@ -13,9 +13,10 @@ class TowersApp
   def player_name_prompt
     begin
       @player_name = gets.chomp.downcase.capitalize
-      raise StandardError if /\s+|\W|\d/.match(@player_name)
+      quit?(@player_name)
+      raise StandardError if !!(/\s+|\W|\d/.match(@player_name))
     rescue
-      puts "ERROR: did not correctly enter the player's name."\
+      puts "\nERROR: did not correctly enter the player's name."\
           " Please try again."
       retry
     end
@@ -23,15 +24,15 @@ class TowersApp
   end
 
   def difficulty_prompt
-    puts "\nHello, #{@player_name}. Select a difficulty level!"
-    puts "[EASY || MEDIUM || HARD]"
+    puts "\nHello, #{@player_name}. Select a difficulty level!"\
+         "\n[EASY || MEDIUM || HARD]"
     begin
-      @app_difficulty = gets.chomp.downcase.to_sym
-      raise StandardError if %w{easy medium hard}.none? do |diff|
-        diff.to_sym == @app_difficulty
-      end
+      @app_difficulty = gets.chomp.downcase
+      quit?(@app_difficulty.to_s)
+      raise StandardError if !(/easy|medium|hard/i.match(@app_difficulty))
+      @app_difficulty = @app_difficulty.to_sym
     rescue
-      puts "ERROR: did not correctly enter the difficulty."\
+      puts "\nERROR: did not correctly enter the difficulty."\
           " Please try again."
       retry
     end
@@ -44,40 +45,58 @@ class TowersApp
     topmost_choice = self.towers[tower_choice][-1]
     topmost_source = self.towers[@source_tower][-1]
     raise StandardError if\
-      (%w{first second third}.none?{|choice| choice.to_sym == tower_choice})\
-      ||(option == true && self.towers[tower_choice].empty?)\
-      ||((option == false && topmost_choice < topmost_source) \
+      !(/first|second|third/i.match(tower_choice))\
+      ||(option == :source && self.towers[tower_choice].empty?)\
+      ||((option == :destination && topmost_choice < topmost_source) \
       unless self.towers[tower_choice].empty?)
   end
 
-  #Picking a source tower.
-  def source_tower_choice
-    puts "Whose disc will you remove?"
+  #Text output for prompts.
+  def prompt_text (option)
+    puts "\nWhose disc will you remove?" if option == :source
+    puts "\nWhere would you like to place the disc?" if option == :destination
     puts "[FIRST || SECOND || THIRD]"
+  end
+
+  #Store choice in instance variables
+  def set_choice (choice,option)
+    @source_tower = choice if option == :source
+    @destination_tower = choice if option == :destination
+  end
+
+  #Checking for choice or render.
+  def choice_prompt_check (option)
+    while true
+      prompt_text(option)
+      tower = gets.chomp.downcase.to_sym
+      !!(/render/i.match(tower.to_s)) ? self.render : break
+    end
+    tower
+  end
+
+  #Prompt for tower choice.
+  def tower_choice_prompt (option)
     begin
-      @source_tower = gets.chomp.downcase.to_sym
-      self.tower_choice_error(@source_tower, true)
+      tower = choice_prompt_check(option)
+      quit?(tower.to_s)
+      set_choice(tower,option)
+      self.tower_choice_error(tower,option)
     rescue
       puts "ERROR: did not correctly enter a tower choice."\
         " Please try again."
       retry
     end
-    @source_tower
+    tower
+  end
+
+  #Picking a source tower.
+  def source_tower_choice
+    tower_choice_prompt(:source)
   end
 
   #Picking a destination tower.
   def destination_tower_choice
-    #Picking a destination tower.
-    puts "Where would you like to place the disc?"
-    begin
-      @destination_tower = gets.chomp.downcase.to_sym
-      self.tower_choice_error(@destination_tower, false)
-    rescue
-      puts "ERROR: did not correctly enter a tower choice."\
-          " Please try again."
-      retry
-    end
-    @destination_tower
+    tower_choice_prompt(:destination)
   end
 
   def method_missing(method_name, *args, &block)
