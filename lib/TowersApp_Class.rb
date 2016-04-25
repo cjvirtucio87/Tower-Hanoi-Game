@@ -7,9 +7,9 @@ class TowersApp
     puts "\nWelcome to the Tower of Hanoi game!"
     sleep 1.5
     puts "This is a game based on the Tower of Hanoi problem."
-    sleep 1
+    sleep 1.5
     puts "Type 'render' after selecting a difficulty to display the towers."
-    sleep 1
+    sleep 1.5
     puts "Type 'quit' anytime to leave the game."
     sleep 1.5
     puts "Ready? Please type in your name!"\
