@@ -4,9 +4,15 @@ class TowersApp
   def initialize(target_object)
     @target = target_object
     @messages = []
-    puts "\nWelcome to Towers of Hanoi!"
+    puts "\nWelcome to the Tower of Hanoi game!"
     sleep 1.5
-    puts "Please type in your name!"\
+    puts "This is a game based on the Tower of Hanoi problem."
+    sleep 1
+    puts "Type 'render' after selecting a difficulty to display the towers."
+    sleep 1
+    puts "Type 'quit' anytime to leave the game."
+    sleep 1.5
+    puts "Ready? Please type in your name!"\
     "\nNo spaces, numbers, or special characters!"
   end
 
