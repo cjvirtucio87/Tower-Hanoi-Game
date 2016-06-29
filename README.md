@@ -1,5 +1,7 @@
 # Tower-Hanoi-Game
-Gem based on the Tower of Hanoi puzzle (https://en.wikipedia.org/wiki/Tower_of_Hanoi)
+Download on RubyGems: https://rubygems.org/gems/tower-hanoi-game
+
+This is a terminal-run game based on the Tower of Hanoi puzzle (https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 
 
 Simply type $tower-hanoi-game in the command line after installing the gem.
